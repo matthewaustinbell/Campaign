@@ -7,6 +7,7 @@ namespace camp.aign.DataAccess
 {
     public class QuestionRepository
     {
+        private string _connectionString = "Server=local;Database=campaignDB;Trusted_Connection=True;";
         public List<APIQuestion> GetAPIQuestions(int howMany = 1)
         {
 

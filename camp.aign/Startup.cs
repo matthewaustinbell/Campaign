@@ -47,6 +47,7 @@ namespace camp.aign
                 app.UseHsts();
             }
 
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
