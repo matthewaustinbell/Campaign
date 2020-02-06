@@ -10,6 +10,6 @@ namespace camp.aign.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string donationTotal { get; set; }
+        public int donationTotal { get; set; }
     }
 }
