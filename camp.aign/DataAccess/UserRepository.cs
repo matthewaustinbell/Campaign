@@ -5,7 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using camp.aign.Models;
 using Dapper;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace camp.aign.DataAccess
 {
@@ -18,9 +19,7 @@ namespace camp.aign.DataAccess
             using (var db = new SqlConnection(_connectionString))
             {
                 var sql = @"Update [User]
-                                SET [Name] = @Name
-                                    ,[Email] = @Email
-                                    ,[donationTotal] = @donationTotal
+                                SET [donationTotal] = @donationTotal
                             output inserted.*
                                 WHERE id = @id";
 
@@ -29,6 +28,15 @@ namespace camp.aign.DataAccess
                 var user = db.QueryFirst<User>(sql, updatedUser);
 
                 return user;
+            }
+        }
+
+        public User getUserById(int userId)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"SELECT * FROM [USER] WHERE id = @userId";
+                return db.QueryFirst<User>(sql, new {userId});
             }
         }
     }
