@@ -13,15 +13,22 @@ namespace camp.aign.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpPut("{userId}" )]
-
-        public IActionResult updateUser(User newUserCommand, int userId)
+        [HttpPut("donation/{userId}")]
+        public IActionResult UpdateDonationAmount(int userId)
         {
-
             var repo = new UserRepository();
-            var userThatGotUpdated = repo.UPDATE(newUserCommand, userId);
-
-            return Created($"api/users/{userThatGotUpdated.donationTotal}", userThatGotUpdated);
+            var user = repo.getUserById(userId);
+            var addtionalDonationAmount = 1;
+            user.donationTotal += addtionalDonationAmount;
+            var userThatGotUpdated = repo.UPDATE(user, userId);
+            return Ok(userThatGotUpdated.donationTotal);
         }
+
+        [HttpGet("{userId}")]
+        public ActionResult<User> getUserById(int userId)
+        {
+            var repo = new UserRepository();
+            return repo.getUserById(userId);
+        } 
     }
 }
