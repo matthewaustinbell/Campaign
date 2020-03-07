@@ -39,6 +39,18 @@ namespace camp.aign.DataAccess
                 return db.QueryFirst<User>(sql, new {userId});
             }
         }
+
+        public IEnumerable<User> GetAll()
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sql = @"SELECT [Name], donationTotal, [Id]
+                            FROM [USER]
+                            ORDER BY donationTotal DESC";
+                var users = db.Query<User>(sql);
+                return users;
+            }
+        }
     }
 }
 

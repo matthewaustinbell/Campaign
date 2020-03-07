@@ -29,6 +29,14 @@ namespace camp.aign.Controllers
         {
             var repo = new UserRepository();
             return repo.getUserById(userId);
-        } 
+        }
+
+        [HttpGet]
+        public IEnumerable<User> GetUsers()
+        {
+            var repo = new UserRepository();
+            var users = repo.GetAll();
+            return users;
+        }
     }
 }
